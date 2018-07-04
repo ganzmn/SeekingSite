@@ -1,0 +1,83 @@
+﻿@model SeekingPuraVida.Web.Models.BlogVM
+@{
+    ViewBag.Title = "AddBlog";
+}
+
+<style>
+    body{
+        margin-left: 40px;
+    }
+</style>
+
+<h2>Add Blog</h2>
+
+<div class="row">
+    @using (Html.BeginForm("AddBlog", "Admin", FormMethod.Post, new
+    { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(m => m.FeatureImageLocation)
+        <div class="col-xs-offset-1 col-xs-2 divMain">
+            <h4>Blog Category Name</h4>
+            <div>
+                @Html.ListBoxFor(m => m.SelectedCategoryIds, Model.CategoryItems, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="col-xs-offset-1 col-xs-10 divMain">
+            <h4>Blog Title</h4>
+            <div class="form-group" style="font-size: 14pt">
+                @Html.TextBoxFor(t => t.Blog.Title, new { @class = "form-group" })
+                @Html.ValidationMessageFor(t => t.Blog.Title)
+            </div>
+
+            <h4>Blog Subtitle</h4>
+            <div class="form-group" style="font-size: 14pt">
+                @Html.TextBoxFor(t => t.Blog.SubTitle, new { @class = "form-group" })
+                @Html.ValidationMessageFor(t => t.Blog.SubTitle)
+            </div>
+
+            <h4>Country</h4>
+            <div class="form-group" style="font-size: 14pt">
+                @Html.TextBoxFor(t => t.Blog.Country, new { @class = "form-group" })
+                @Html.ValidationMessageFor(t => t.Blog.Country)
+            </div>
+
+            <h4>Blog Body</h4>
+            <div class="form-group" style="font-size: 14pt">
+                @Html.TextBoxFor(t => t.Blog.BlogBody, new { @class = "form-group" })
+                @Html.ValidationMessageFor(t => t.Blog.BlogBody)
+            </div>
+
+            <h4>Blog Summary</h4>
+            <div class="form-group" style="font-size: 14pt">
+                @Html.TextBoxFor(t => t.Blog.Summary, new { @class = "form-group" })
+                @Html.ValidationMessageFor(t => t.Blog.Summary)
+            </div>
+
+            <label for="file">Upload Feature Image:</label>
+            @Html.TextBoxFor(m => m.File, new { type = "file" })
+        </div>
+        @Html.Label("Featured")
+        @Html.CheckBoxFor(m => m.Blog.IsFeatured)
+        @Html.Label("Finished")
+        @Html.CheckBoxFor(m => m.Blog.IsFinished)
+
+        <button type="submit">Add Blog</button>
+    }
+</div>
+
+@Html.HiddenFor(m => m.Blog.BlogTags)
+@Html.HiddenFor(m => m.Blog.BlogId)
+@Html.HiddenFor(m => m.Blog.FeatureImageLocation)
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#newCategoryDiv').hide();
+    });
+
+    $('#addNewCategory').on('click', function () {
+        $('#newCategoryDiv').show();
+        $('#newCategoryDiv').attr('disabled', disabled);
+    });
+</script>
+

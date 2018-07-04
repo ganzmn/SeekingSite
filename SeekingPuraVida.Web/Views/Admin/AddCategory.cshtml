@@ -1,0 +1,16 @@
+﻿@model SeekingPuraVida.Models.Category
+@{
+    ViewBag.Title = "AddCategory";
+}
+
+<h2>Add Category</h2>
+
+@using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post))
+{
+    @Html.Label("New Category Name: ")
+    @Html.TextBoxFor(m => m.CategoryName);
+    <button type="submit" name="command" value="Submit">Submit</button>
+    <button type="submit" name="command" value="Cancel">Cancel</button>
+}
+
+
